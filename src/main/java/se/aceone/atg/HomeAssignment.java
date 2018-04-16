@@ -7,7 +7,6 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,10 +28,6 @@ public class HomeAssignment {
 		log.info("Button cmd: " + e.getActionCommand());
 	}
 
-	/**
-	 * Create the GUI and show it. For thread safety, this method should be invoked
-	 * from the event-dispatching thread.
-	 */
 	private static void createAndShowGUI() {
 		log.info("Build UI");
 		// Create and set up the window.
@@ -66,7 +61,8 @@ public class HomeAssignment {
 		compsToExperiment.add(comboBox, constr);
 
 		try {
-			BufferedImage blueDot = ImageIO.read(new File("blue_sphere.png"));
+			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+			BufferedImage blueDot = ImageIO.read(classloader.getResourceAsStream("blue_sphere.png"));
 			JLabel blueDotLabel = new JLabel(new ImageIcon(blueDot.getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 			constr.gridx = 1;
 			constr.gridy = 1;
@@ -84,7 +80,6 @@ public class HomeAssignment {
 		frame.getContentPane().add(topPanel, BorderLayout.NORTH);
 
 		log.info("Display Window");
-		// Display the window.
 		frame.setSize(300, 200);
 		frame.setVisible(true);
 	}
