@@ -35,19 +35,19 @@ public class HomeAssignment {
 		GridBagConstraints constr = new GridBagConstraints();
 		constr.insets = new Insets(5, 5, 5, 5);
 
-		JButton greenButton = new JButton("Grön");
+		JButton greenButton = new JButton("GrÃ¶n");
 		greenButton.addActionListener(HomeAssignment::actionPerformedButton);
 		constr.gridx = 0;
 		constr.gridy = 0;
 		mainPanel.add(greenButton, constr);
 
-		JButton redButton = new JButton("Röd");
+		JButton redButton = new JButton("RÃ¶d");
 		redButton.addActionListener(HomeAssignment::actionPerformedButton);
 		constr.gridx = 1;
 		constr.gridy = 0;
 		mainPanel.add(redButton, constr);
 
-		JComboBox<String> comboBox = new JComboBox<>(new String[] { "Grön", "Röd" });
+		JComboBox<String> comboBox = new JComboBox<>(new String[] { "GrÃ¶n", "RÃ¶d" });
 		comboBox.addActionListener(e -> log.info("ComboBox selected: " + comboBox.getSelectedItem()));
 		constr.gridx = 0;
 		constr.gridy = 1;
