@@ -24,41 +24,34 @@ public class HomeAssignment {
 
 	private static final Logger log = Logger.getLogger(HomeAssignment.class.getName());
 
-	private static void actionPerformedButton(ActionEvent e) {
-		log.info("Button cmd: " + e.getActionCommand());
-	}
-
 	private static void createAndShowGUI() {
 		log.info("Build UI");
-		// Create and set up the window.
 		JFrame frame = new JFrame("HomeAssignment");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		final JPanel compsToExperiment = new JPanel();
-
-		compsToExperiment.setLayout(new GridBagLayout());
-
-		// Add buttons to experiment with Grid Layout
-		JButton greenButton = new JButton("Grön");
-		greenButton.addActionListener(HomeAssignment::actionPerformedButton);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new GridBagLayout());
 
 		GridBagConstraints constr = new GridBagConstraints();
+		constr.insets = new Insets(5, 5, 5, 5);
+
+		JButton greenButton = new JButton("Grön");
+		greenButton.addActionListener(HomeAssignment::actionPerformedButton);
 		constr.gridx = 0;
 		constr.gridy = 0;
-		constr.insets = new Insets(5, 5, 5, 5);
-		compsToExperiment.add(greenButton, constr);
+		mainPanel.add(greenButton, constr);
+
 		JButton redButton = new JButton("Röd");
 		redButton.addActionListener(HomeAssignment::actionPerformedButton);
-
 		constr.gridx = 1;
 		constr.gridy = 0;
-		compsToExperiment.add(redButton, constr);
+		mainPanel.add(redButton, constr);
 
-		final JComboBox<String> comboBox = new JComboBox<>(new String[] { "Grön", "Röd" });
+		JComboBox<String> comboBox = new JComboBox<>(new String[] { "Grön", "Röd" });
 		comboBox.addActionListener(e -> log.info("ComboBox selected: " + comboBox.getSelectedItem()));
 		constr.gridx = 0;
 		constr.gridy = 1;
-		compsToExperiment.add(comboBox, constr);
+		mainPanel.add(comboBox, constr);
 
 		try {
 			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
@@ -67,14 +60,14 @@ public class HomeAssignment {
 			constr.gridx = 1;
 			constr.gridy = 1;
 			constr.anchor = GridBagConstraints.WEST;
-			compsToExperiment.add(blueDotLabel, constr);
+			mainPanel.add(blueDotLabel, constr);
 		} catch (IOException e) {
 			log.log(Level.SEVERE, "Faled to read image", e);
 		}
 
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new BorderLayout());
-		topPanel.add(compsToExperiment, BorderLayout.WEST);
+		topPanel.add(mainPanel, BorderLayout.WEST);
 
 		frame.getContentPane().setLayout(new BorderLayout());
 		frame.getContentPane().add(topPanel, BorderLayout.NORTH);
@@ -82,6 +75,10 @@ public class HomeAssignment {
 		log.info("Display Window");
 		frame.setSize(300, 200);
 		frame.setVisible(true);
+	}
+
+	private static void actionPerformedButton(ActionEvent e) {
+		log.info("Button cmd: " + e.getActionCommand());
 	}
 
 	public static void main(String[] args) {
